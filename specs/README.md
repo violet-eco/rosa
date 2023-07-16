@@ -32,3 +32,6 @@ the file format.
 - Flags: A 1-byte value that indicates additional flags or attributes associated
 with the binary. It provides information about various aspects of the binary
 and guides the loader or interpreter's behaviour during execution.
+
+### Code Section
+> Please refer to the [code document](code.md) for specification documents.
