@@ -6,15 +6,15 @@ It serves as a platform-independent and architecture-agnostic representation of
 executable code within the Code Section. This document provides an overview of
 the purpose, benefits, and usage of the IR in the Rosa file format.
 
-## Purpose of Intermediate Representation (IR)
-The Intermediate Representation (IR) within the Rosa acts as a bridge between
+## Purpose of IR
+IR within the Rosa acts as a bridge between
 the high-level source code of the Violet application and the low-level machine
 code that runs on specific hardware platforms or architectures. It captures the
 essential semantics, structure, and behaviour of the program at a higher level
 of abstraction.
 
-## Benefits of Intermediate Representation (IR)
-The use of an Intermediate Representation (IR) in the Rosa brings several benefits:
+## Benefits of IR
+The use of IR in the Rosa brings several benefits:
 
 1. **Platform Independence:** The IR allows executables to be developed and distributed as binaries that can run on multiple platforms without requiring recompilation or modification of the source code.
 2. **Optimization Opportunities:** The IR provides a higher-level representation that enables verious optimization techniques. Loaders or interpreters can perform optimizations on the IR instructions.

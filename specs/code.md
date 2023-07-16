@@ -24,6 +24,8 @@ in bytes, including the size field itself.
 the Code Section
 
 ### Instructions
+> Refer to [this document](./ir.md) for further information about intermediate representation.
+
 The instructions field holds the platform-independent and architecture-agnostic
 intermediate representation (IR) instructions. These instructions are not specific
 to any particular platform or architecture but can be interpreted or translated
