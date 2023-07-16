@@ -12,7 +12,7 @@ The Header Section has the following structure:
 struct RosaHeader {
     pub signature: [u8; 4],             // A unique identifier indicating the file format ("ROSA")
     pub version: [u8; 3],               // Version number of Rosa (MAJOR.MINOR.PATCH)
-    pub optimization: RosaOptimization  // Includes different levels of optimization
+    pub optimization: RosaOptimization, // Includes different levels of optimization
     pub flags: RosaFlags,               // Additional flags or attributes
 }
 

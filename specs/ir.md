@@ -32,3 +32,109 @@ interpretation or translation to the target platform and architecture during run
 Developers working with the Rosa file format can leverage the IR instructions to achieve
 platform independence, enable optimization opportunities, ensure secure distribution, and
 facilitate efficient execution of the executables.
+
+## Example
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int a = 5;
+    int *ptr = &a;
+    *ptr = 10;
+
+    printf("The value of a is %d\n", a);
+
+    return 0;
+}
+```
+
+The C code translated into the platform-independent and architecture-agnostic
+intermediate representation (IR) used in the Rosa. Here's an example how the IR
+instructions *may* look like:
+
+```asm
+main:
+    LOAD_CONST R1, 5
+    STORE a, R1
+    LOAD_ADDR R2, a
+    STORE ptr, R2
+    LOAD ptr, R2
+    LOAD_R R3, R2
+    LOAD_CONST R4, 10
+    STORE_R R3, R4
+    LOAD a, R1
+    PRINT R1
+    LOAD_CONST R1, 0
+    RETURN R1
+```
+
+And, on aarch64 systems, this IR will translated into:
+```armasm
+.text
+main:
+    SUB SP, SP, #12 // Reserve 12 bytes for 'a' (4) + 'ptr' (8)
+
+    // int a = 5
+    MOV W0, #5
+    STR W0, [SP] // Store 'a' on the stack
+
+    // Load the address of 'a' into 'ptr'
+    LDR X0, =SP
+    ADD X0, X0, #4
+    STR X0, [SP, #8] // Store 'ptr' on the stack
+
+    // Store the value 10 at the address stored in 'ptr'
+    LDR X0, [SP, #4] // Load 'ptr' into register
+    MOV W1, #10
+    STR W1, [X0] // Store value 10 at the address in 'ptr'
+
+    // Prepare the arguments and call printf
+    LDR X0, =FORMAT // Address of the format string
+    LDR X1, [SP] // The value of 'a'
+    MOV X8, #0
+    BL printf
+
+    // Clean up the stack
+    ADD SP, SP, #12
+
+    // Return 0
+    MOV W0, #0
+    RET
+
+.data
+FORMAT: .asciz "The value of a is %d\n"
+```
+
+And, in amd64:
+```x86asm
+section .text
+main:
+    ; Reserve 12 bytes for 'a' (4) + 'ptr' (8)
+    SUB RSP, 12
+
+    ; int a = 5
+    MOV DWORD [RSP], 5
+
+    ; Load the address of 'a' into 'ptr'
+    LEA RAX, [RSP]
+    ADD RAX, 4
+    MOV QWORD [RSP + 8], RAX
+
+    ; Store the value 10 at the address stored in 'ptr'
+    MOV RAX, QWORD [RSP + 8]
+    MOV DWORD [RAX], 10
+
+    ; Prepare the arguments and call printf
+    MOV RDI, FORMAT
+    MOV RSI, DWORD [RSP]
+    CALL printf
+
+    ADD RSP, 12 ; Clean up the stack
+
+    MOV RAX, 0
+    RET
+
+section .data
+FORMAT: db "The value of a is %d", 10, 0
+```
