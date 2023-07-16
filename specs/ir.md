@@ -1,4 +1,4 @@
-# Intermediate Representation (IR) Documentation
+# Rosa File Format - Intermediate Representation (IR) Documentation
 
 ## Introduction
 Intermediate Representation (IR) is a crucial aspect of the Rosa.

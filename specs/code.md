@@ -1,4 +1,4 @@
-# Code Section Specification
+# Rosa File Format - Code Section Documentation
 
 ## Introduction
 The Code Section is a critical component of the Rosa. It contains

@@ -1,4 +1,4 @@
-# Header Section Specification
+# Rosa File Format - Header Section Specification
 
 ## Introduction
 The Header Section is crucial component of Rosa files. It is located
