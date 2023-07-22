@@ -42,5 +42,5 @@ rosa translate -f binary.rosa -a x86_64
 ```
 
 # License
-The Rosa project is licensed under the Apache-2.0 License. See the LICENSE
+The Rosa project is licensed under the Violet Public License 1.0. See the [LICENSE](./LICENSE)
 for more details.
